@@ -2,19 +2,20 @@ package com.rs.fer.request;
 
 public class AddExpenseRequestVO {
 
-	private String expensetype;
+	private String expenseType;
 	private String date;
 	private float price;
-	private int numberofitems;
+	private int numberOfItems;
 	private float total;
-	private String bywhom;
-	private int userid;
+	private String byWhom;
+	private int userId;
 	
-	public String getExpensetype() {
-		return expensetype;
+	
+	public String getExpenseType() {
+		return expenseType;
 	}
-	public void setExpensetype(String expensetype) {
-		this.expensetype = expensetype;
+	public void setExpenseType(String expenseType) {
+		this.expenseType = expenseType;
 	}
 	public String getDate() {
 		return date;
@@ -28,11 +29,11 @@ public class AddExpenseRequestVO {
 	public void setPrice(float price) {
 		this.price = price;
 	}
-	public int getNumberofitems() {
-		return numberofitems;
+	public int getNumberOfItems() {
+		return numberOfItems;
 	}
-	public void setNumberofitems(int numberofitems) {
-		this.numberofitems = numberofitems;
+	public void setNumberOfItems(int numberOfItems) {
+		this.numberOfItems = numberOfItems;
 	}
 	public float getTotal() {
 		return total;
@@ -40,17 +41,17 @@ public class AddExpenseRequestVO {
 	public void setTotal(float total) {
 		this.total = total;
 	}
-	public String getBywhom() {
-		return bywhom;
+	public String getByWhom() {
+		return byWhom;
 	}
-	public void setBywhom(String bywhom) {
-		this.bywhom = bywhom;
+	public void setByWhom(String byWhom) {
+		this.byWhom = byWhom;
 	}
-	public int getUserid() {
-		return userid;
+	public int getUserId() {
+		return userId;
 	}
-	public void setUserid(int userid) {
-		this.userid = userid;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 	
 	
