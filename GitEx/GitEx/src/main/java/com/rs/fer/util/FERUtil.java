@@ -7,7 +7,7 @@ import com.rs.fer.request.RegistrationRequestVO;
 public interface FERUtil {
 	
 	User loadUser(RegistrationRequestVO regReqVO);
-	
+
 	Expense loadExpense (AddExpenseRequestVO addExpReqVO);
 	
 }

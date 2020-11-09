@@ -10,7 +10,7 @@ import com.rs.fer.response.RegistrationResponseVO;
 public interface FERservice {
 	
 	RegistrationResponseVO registration(RegistrationRequestVO regReqVO);
-
+ 
 	LoginResponseVO login (LoginRequestVO loginReqVo);
 	
 	AddExpenseResponseVO addExpense (AddExpenseRequestVO addExpReqVo);
