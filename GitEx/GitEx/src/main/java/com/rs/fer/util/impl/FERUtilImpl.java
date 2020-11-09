@@ -5,6 +5,7 @@ import com.rs.fer.bean.Address;
 import com.rs.fer.bean.Expense;
 import com.rs.fer.bean.User;
 import com.rs.fer.request.AddExpenseRequestVO;
+import com.rs.fer.request.EditExpenseRequestVO;
 import com.rs.fer.request.RegistrationRequestVO;
 import com.rs.fer.request.UpdateUserRequestVO;
 import com.rs.fer.util.FERUtil;
@@ -33,7 +34,7 @@ public class FERUtilImpl implements FERUtil {
 	public Expense loadExpense(AddExpenseRequestVO addExpReqVO) {
 
 		Expense expense = new Expense();
-		
+
 		expense.setExpenseType(addExpReqVO.getExpenseType());
 		expense.setDate(addExpReqVO.getDate());
 		expense.setPrice(addExpReqVO.getPrice());
@@ -45,11 +46,11 @@ public class FERUtilImpl implements FERUtil {
 
 		return expense;
 	}
-	
+
 	@Override
 	public User loadUpdateUser(UpdateUserRequestVO updateUserReqVO) {
-	
-		User user=new User();
+
+		User user = new User();
 		user.setId(updateUserReqVO.getUserId());
 		user.setFirstname(updateUserReqVO.getFirstname());
 		user.setLastname(updateUserReqVO.getLastname());
@@ -58,13 +59,13 @@ public class FERUtilImpl implements FERUtil {
 		user.setUsername(updateUserReqVO.getUsername());
 		user.setPassword(updateUserReqVO.getPassword());
 		user.setUpdated(DateUtil.getCurrentDate());
-		
-		Address address=user.getAddress();
-		
-		int addId=updateUserReqVO.getAddressId();
-		if(addId<=0) {
+
+		Address address = user.getAddress();
+
+		int addId = updateUserReqVO.getAddressId();
+		if (addId <= 0) {
 			address.setCreated(DateUtil.getCurrentDate());
-		}else {
+		} else {
 			address.setUpdated(DateUtil.getCurrentDate());
 		}
 		address.setLineOne(updateUserReqVO.getLine1());
@@ -73,8 +74,23 @@ public class FERUtilImpl implements FERUtil {
 		address.setState(updateUserReqVO.getState());
 		address.setPincode(updateUserReqVO.getPostal());
 		address.setCountry(updateUserReqVO.getCountry());
-		
+
 		return user;
+	}
+
+	@Override
+	public Expense loadExpense(EditExpenseRequestVO editReqVo) {
+		Expense expense = new Expense();
+
+		expense.setExpenseType(editReqVo.getExpensetype());
+		expense.setDate(editReqVo.getDate());
+		expense.setPrice(editReqVo.getPrice());
+		expense.setNumberOfItems(editReqVo.getNumberofitems());
+		expense.setTotal(editReqVo.getTotal());
+		expense.setByWhom(editReqVo.getBywhom());
+		expense.setUpdated(DateUtil.getCurrentDate());
+
+		return expense;
 	}
 
 }

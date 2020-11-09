@@ -13,33 +13,19 @@ import com.rs.fer.dao.AddressRepository;
 import com.rs.fer.dao.ExpenseRepository;
 import com.rs.fer.dao.UserRepository;
 import com.rs.fer.request.AddExpenseRequestVO;
-<<<<<<< HEAD
 import com.rs.fer.request.EditExpenseRequestVO;
-=======
 import com.rs.fer.request.ExpenseReportRequestVO;
->>>>>>> branch 'master' of https://github.com/naresh1755A9/GitEx.git
 import com.rs.fer.request.LoginRequestVO;
 import com.rs.fer.request.RegistrationRequestVO;
 import com.rs.fer.request.ResetPasswordRequestVO;
 import com.rs.fer.request.UpdateUserRequestVO;
 import com.rs.fer.response.AddExpenseResponseVO;
-<<<<<<< HEAD
-<<<<<<< HEAD
 import com.rs.fer.response.DeleteExpenseResponseVO;
 import com.rs.fer.response.EditExpenseResponseVO;
-=======
-<<<<<<< HEAD
-=======
->>>>>>> branch 'master' of https://github.com/naresh1755A9/GitEx.git
 import com.rs.fer.response.GetExpenseResponseVO;
 import com.rs.fer.response.GetExpensesResponseVO;
 import com.rs.fer.response.ExpenseReportResponseVO;
 import com.rs.fer.response.GetUserResponseVO;
-<<<<<<< HEAD
->>>>>>> branch 'master' of https://github.com/naresh1755A9/GitEx.git
->>>>>>> branch 'master' of https://github.com/naresh1755A9/GitEx.git
-=======
->>>>>>> branch 'master' of https://github.com/naresh1755A9/GitEx.git
 import com.rs.fer.response.LoginResponseVO;
 import com.rs.fer.response.RegistrationResponseVO;
 import com.rs.fer.response.ResetPasswordResponseVO;
@@ -84,9 +70,7 @@ public class FERServiceimpl implements FERservice {
 	@Override
 	public LoginResponseVO login(LoginRequestVO loginReqVO) {
 
-		List<User> users = userRepository.findByUsernameAndPassword(loginReqVO.getUsername(),
-				loginReqVO.getPassword());
-
+		List<User> users = userRepository.findByUsernameAndPassword(loginReqVO.getUsername(), loginReqVO.getPassword());
 
 		if (users.size() > 0) {
 			return new LoginResponseVO(HttpStatus.OK, "000", "User is valid", null);
@@ -102,14 +86,11 @@ public class FERServiceimpl implements FERservice {
 		expense = expenseRepository.save(expense);
 
 		if (expense.getExpenseId() > 0) {
-<<<<<<< HEAD
->>>>>>> branch 'master' of https://github.com/naresh1755A9/GitEx.git
 			return new AddExpenseResponseVO(HttpStatus.OK, "000", "Expense is added successfully", null);
 		} else
 			return new AddExpenseResponseVO(HttpStatus.OK, "001", "Expense add is failed", null);
 	}
-<<<<<<< HEAD
-	
+
 	@Override
 	public EditExpenseResponseVO editExpense(EditExpenseRequestVO editReqVo) {
 
@@ -117,36 +98,24 @@ public class FERServiceimpl implements FERservice {
 
 		expense = expenseRepository.save(expense);
 
-		if (expense.getExpenseid() > 0) {
+		if (expense.getExpenseId() > 0) {
 			return new EditExpenseResponseVO(HttpStatus.OK, "000", "Expense edited successfully ", null);
 
 		} else
 			return new EditExpenseResponseVO(HttpStatus.OK, "001", "Expense edited Failed: ", null);
 
 	}
-	
+
 	@Override
 	public DeleteExpenseResponseVO deleteExpense(int expenseid) {
 		expenseRepository.delete(expenseid);
-		
-		Expense expense = ferUtil.getOne(expenseid);
+		Expense expense = expenseRepository.getOne(expenseid);
 
 		if (expense == null) {
 			return new DeleteExpenseResponseVO(HttpStatus.OK, "000", "Expense deleted successfully ", null);
 
 		} else
 			return new DeleteExpenseResponseVO(HttpStatus.OK, "001", "Expense deleted Failed: ", null);
-
-	}
-
-=======
-=======
->>>>>>> branch 'master' of https://github.com/naresh1755A9/GitEx.git
-
-			return new AddExpenseResponseVO(HttpStatus.OK, "000", "Expense is added successfully", null);
-		} else {
-			return new AddExpenseResponseVO(HttpStatus.OK, "001", "Expense add is failed", null);
-		}
 
 	}
 
@@ -238,9 +207,4 @@ public class FERServiceimpl implements FERservice {
 
 	}
 
-<<<<<<< HEAD
->>>>>>> branch 'master' of https://github.com/naresh1755A9/GitEx.git
->>>>>>> branch 'master' of https://github.com/naresh1755A9/GitEx.git
-=======
->>>>>>> branch 'master' of https://github.com/naresh1755A9/GitEx.git
 }
