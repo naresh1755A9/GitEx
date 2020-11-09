@@ -1,5 +1,6 @@
 package com.rs.fer.util;
 
+import com.rs.fer.bean.Expense;
 import com.rs.fer.bean.User;
 import com.rs.fer.request.AddExpenseRequestVO;
 import com.rs.fer.request.RegistrationRequestVO;

@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import com.rs.fer.bean.Expense;
 import com.rs.fer.bean.User;
 import com.rs.fer.dao.AddressRepository;
 import com.rs.fer.dao.ExpenseRepository;
@@ -14,11 +15,14 @@ import com.rs.fer.dao.UserRepository;
 import com.rs.fer.request.AddExpenseRequestVO;
 import com.rs.fer.request.LoginRequestVO;
 import com.rs.fer.request.RegistrationRequestVO;
+import com.rs.fer.request.ResetPasswordRequestVO;
 import com.rs.fer.response.AddExpenseResponseVO;
+import com.rs.fer.response.GetExpenseResponseVO;
+import com.rs.fer.response.GetExpensesResponseVO;
 import com.rs.fer.response.LoginResponseVO;
 import com.rs.fer.response.RegistrationResponseVO;
+import com.rs.fer.response.ResetPasswordResponseVO;
 import com.rs.fer.service.FERservice;
-import com.rs.fer.serviceImpl.Expense;
 import com.rs.fer.util.FERUtil;
 
 @Service
@@ -38,44 +42,94 @@ public class FERServiceimpl implements FERservice {
 
 	@Override
 	public RegistrationResponseVO registration(RegistrationRequestVO regReqVO) {
-		
+
 		List<User> users = userRepository.findByEmail(regReqVO.getEmail());
-		if(!CollectionUtils.isEmpty(users)) {
+		if (!CollectionUtils.isEmpty(users)) {
 			return new RegistrationResponseVO(HttpStatus.OK, "100",
-					"User is already registered with given email: "+regReqVO.getEmail(), null);
+					"User is already registered with given email: " + regReqVO.getEmail(), null);
 		}
-		
+
 		User user = ferUtil.loadUser(regReqVO);
-		
+
 		user = userRepository.save(user);
-		if(user.getId()>0) {
-			return new RegistrationResponseVO(HttpStatus.OK, "000","User is registered Successfully", null);
-		}else {
-			return new RegistrationResponseVO(HttpStatus.OK, "001","User registration Failed", null);
+		if (user.getId() > 0) {
+			return new RegistrationResponseVO(HttpStatus.OK, "000", "User is registered Successfully", null);
+		} else {
+			return new RegistrationResponseVO(HttpStatus.OK, "001", "User registration Failed", null);
 		}
 	}
-	
+
 	@Override
 	public LoginResponseVO login(LoginRequestVO loginReqVO) {
-		
-		List<User> users = userRepository.findByUsernameAndPassword(LoginRequestVO.getUsername(), LoginRequestVO.getPassword());
- 
-		if(users.size()>0) {
+
+		List<User> users = userRepository.findByUsernameAndPassword(LoginRequestVO.getUsername(),
+				LoginRequestVO.getPassword());
+
+		if (users.size() > 0) {
 			return new LoginResponseVO(HttpStatus.OK, "000", "User is valid", null);
-		}else
+		} else
 			return new LoginResponseVO(HttpStatus.OK, "001", "User is invalid", null);
 	}
-	
+
 	@Override
 	public AddExpenseResponseVO addExpense(AddExpenseRequestVO addExpReqVO) {
-		
+
 		Expense expense = FERUtil.loadExpense(addExpReqVO);
-		
+
 		expense = expenseRepository.save(expense);
-		
-		if(expense.getExpenseid()>0) {
+
+		if (expense.getExpenseid() > 0) {
 			return new AddExpenseResponseVO(HttpStatus.OK, "000", "Expense is added successfully", null);
-		}else
+		} else
 			return new AddExpenseResponseVO(HttpStatus.OK, "001", "Expense add is failed", null);
 	}
+
+}
+
+	@Override
+	public GetExpenseResponseVO getexpense(int expenseId) {
+
+		Expense expense = expenseRepository.getOne(expenseId);
+
+		if (expense != null) {
+
+			return new GetExpenseResponseVO(HttpStatus.OK, "000", "", null, expense);
+		} else {
+
+			return new GetExpenseResponseVO(HttpStatus.OK, "001", "No expense founf for given expenseId", null);
+
+		}
+	}
+
+	@Override
+	public GetExpensesResponseVO getexpenses(int userid) {
+
+		if (userRepository.findOne(userid) == null) {
+			return new GetExpensesResponseVO(HttpStatus.OK, "000", "UserId is invalid", null);
+		} else {
+			List<Expense> expenses = expenseRepository.findByUserId(userid);
+			if (expenses.isEmpty() || expenses == null) {
+				return new GetExpensesResponseVO(HttpStatus.OK, "001", "No Expenses found", null);
+			} else {
+
+				return new GetExpensesResponseVO(HttpStatus.OK, "000", "", null);
+
+			}
+		}
+	}
+
+@Override
+public ResetPasswordResponseVO resetPassword(ResetPasswordRequestVO resetReqVO) {
+
+	User user = userRepository.findByIdAndPassword(resetReqVO.getUserId(), resetReqVO.getCurrentPassword());
+	;
+	user.setPassword(resetReqVO.getNewPassword());
+	user = userRepository.save(user);
+
+	if (user.getPassword() == resetReqVO.getNewPassword()) {
+		return new ResetPasswordResponseVO(HttpStatus.OK, "000", "Password reset is successflly", null);
+	} else
+		return new ResetPasswordResponseVO(HttpStatus.OK, "001", "Passsword reset  is failed", null);
+
+}
 }

@@ -10,4 +10,6 @@ import com.rs.fer.bean.Expense;
 @Repository
 public interface ExpenseRepository extends JpaRepository<Expense, Integer> {
 
+	List<Expense> findByUserId(int userid);
+
 }

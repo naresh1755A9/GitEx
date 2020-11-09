@@ -7,12 +7,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rs.fer.request.AddExpenseRequestVO;
 import com.rs.fer.request.LoginRequestVO;
 import com.rs.fer.request.RegistrationRequestVO;
+import com.rs.fer.request.ResetPasswordRequestVO;
+import com.rs.fer.respone.GetExpenseResponseVO;
+import com.rs.fer.respone.GetExpensesResponseVO;
+import com.rs.fer.respone.ResetPasswordResponseVO;
 import com.rs.fer.response.AddExpenseResponseVO;
 import com.rs.fer.response.LoginResponseVO;
 import com.rs.fer.response.RegistrationResponseVO;
@@ -61,4 +67,40 @@ public class FERController {
 		}else
 			return ferService.addExpense(addExpReqVO);
 	}
+	@PutMapping("/resetPassword")
+	public ResetPasswordResponseVO resetPassword(@ModelAttribute ResetPasswordRequestVO resetReqVO) {
+
+		Set<String> errorMessages = ferValidation.validateResetPasswordRequest(resetReqVO);
+
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+
+			return new ResetPasswordResponseVO(HttpStatus.PRECONDITION_REQUIRED, "999", "", errorMessages);
+		} else
+			return ferService.resetPassword(resetReqVO);
+	}
+
+	@GetMapping("/expense/{id}")
+	public GetExpenseResponseVO getexpense(@PathVariable("id") int expenseId) {
+
+		Set<String> errorMessages = ferValidation.validateGetExpense(expenseId);
+
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+
+			return new GetExpenseResponseVO(HttpStatus.PRECONDITION_REQUIRED, "999", "", errorMessages);
+		} else
+			return ferService.getexpense(expenseId);
+	}
+
+	@GetMapping("/expenses/{userid}")
+	public GetExpensesResponseVO getexpenses(@PathVariable("userid") int userId) {
+
+		Set<String> errorMessages = ferValidation.validateGetExpenses(userId);
+
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+
+			return new GetExpensesResponseVO(HttpStatus.PRECONDITION_REQUIRED, "999", "", errorMessages);
+		} else
+			return ferService.getexpenses(userId);
+	}
+
 }
