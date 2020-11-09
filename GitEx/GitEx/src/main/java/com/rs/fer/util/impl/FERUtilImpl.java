@@ -2,9 +2,12 @@ package com.rs.fer.util.impl;
 
 import org.springframework.stereotype.Component;
 
+import com.rs.fer.bean.Address;
+import com.rs.fer.bean.Expense;
 import com.rs.fer.bean.User;
 import com.rs.fer.request.AddExpenseRequestVO;
 import com.rs.fer.request.RegistrationRequestVO;
+import com.rs.fer.request.UpdateUserRequestVO;
 import com.rs.fer.util.FERUtil;
 
 @Component
@@ -32,16 +35,48 @@ public class FERUtilImpl implements FERUtil {
 		
 		Expense expense = new Expense();
 		
-		expense.setExpensetype(addExpReqVO.getExpensetype());
+		expense.setExpenseType(addExpReqVO.getExpensetype());
 		expense.setDate(addExpReqVO.getDate());
 		expense.setPrice(addExpReqVO.getPrice());
-		expense.setNumberofitems(addExpReqVO.getNumberofitems());
+		expense.setNumberOfItems(addExpReqVO.getNumberofitems());
 		expense.setTotal(addExpReqVO.getTotal());
-		expense.setBywhom(addExpReqVO.getBywhom());
-		expense.setUserid(addExpReqVO.getUserid());
+		expense.setByWhom(addExpReqVO.getBywhom());
+		expense.setUserId(addExpReqVO.getUserid());
 		
 		expense.setCreated(DateUtil.getCurrentDate());
 		
 		return expense;
 	}
+	
+	@Override
+	public User loadUpdateUser(UpdateUserRequestVO updateUserReqVO) {
+	
+		User user=new User();
+		user.setId(updateUserReqVO.getUserId());
+		user.setFirstname(updateUserReqVO.getFirstname());
+		user.setLastname(updateUserReqVO.getLastname());
+		user.setEmail(updateUserReqVO.getEmail());
+		user.setMobile(updateUserReqVO.getMobile());
+		user.setUsername(updateUserReqVO.getUsername());
+		user.setPassword(updateUserReqVO.getPassword());
+		user.setUpdated(DateUtil.getCurrentDate());
+		
+		Address address=user.getAddress();
+		
+		int addId=updateUserReqVO.getAddressId();
+		if(addId<=0) {
+			address.setCreated(DateUtil.getCurrentDate());
+		}else {
+			address.setUpdated(DateUtil.getCurrentDate());
+		}
+		address.setLineOne(updateUserReqVO.getLine1());
+		address.setLineTwo(updateUserReqVO.getLine2());
+		address.setCity(updateUserReqVO.getCity());
+		address.setState(updateUserReqVO.getState());
+		address.setPincode(updateUserReqVO.getPostal());
+		address.setCountry(updateUserReqVO.getCountry());
+		
+		return user;
+	}
+
 }
