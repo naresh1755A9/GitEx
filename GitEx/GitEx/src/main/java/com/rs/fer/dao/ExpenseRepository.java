@@ -9,5 +9,13 @@ import com.rs.fer.bean.Expense;
 
 @Repository
 public interface ExpenseRepository extends JpaRepository<Expense, Integer> {
+	
+	List<Expense> findByUserId(int userId);
+
+	List<Expense> findByUserIdAndExpenseTypeAndDateBetween(int userId,String expenseType,String fromDate,String toDate);
+
+	
+
+	List<Expense> findByUserId(int userid);
 
 }
