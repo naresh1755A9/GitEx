@@ -3,6 +3,7 @@ package com.rs.fer.util.impl;
 import org.springframework.stereotype.Component;
 
 import com.rs.fer.bean.User;
+import com.rs.fer.request.AddExpenseRequestVO;
 import com.rs.fer.request.RegistrationRequestVO;
 import com.rs.fer.util.FERUtil;
 
@@ -24,5 +25,23 @@ public class FERUtilImpl implements FERUtil {
 		user.setCreated(DateUtil.getCurrentDate());
 		
 		return user;
+	}
+	
+	@Override
+	public Expense loadExpense(AddExpenseRequestVO addExpReqVO) {
+		
+		Expense expense = new Expense();
+		
+		expense.setExpensetype(addExpReqVO.getExpensetype());
+		expense.setDate(addExpReqVO.getDate());
+		expense.setPrice(addExpReqVO.getPrice());
+		expense.setNumberofitems(addExpReqVO.getNumberofitems());
+		expense.setTotal(addExpReqVO.getTotal());
+		expense.setBywhom(addExpReqVO.getBywhom());
+		expense.setUserid(addExpReqVO.getUserid());
+		
+		expense.setCreated(DateUtil.getCurrentDate());
+		
+		return expense;
 	}
 }

@@ -5,11 +5,16 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rs.fer.request.AddExpenseRequestVO;
+import com.rs.fer.request.LoginRequestVO;
 import com.rs.fer.request.RegistrationRequestVO;
+import com.rs.fer.response.AddExpenseResponseVO;
+import com.rs.fer.response.LoginResponseVO;
 import com.rs.fer.response.RegistrationResponseVO;
 import com.rs.fer.service.FERservice;
 import com.rs.fer.util.validation.FERValidation;
@@ -35,4 +40,25 @@ public class FERController {
 		}
 	}
 	
+	@GetMapping("/login")
+	public LoginResponseVO login(@ModelAttribute LoginRequestVO loginReqVO) {
+		
+		Set<String> errorMessages = ferValidation.validateLoginRequest(loginReqVO);
+		
+		if(!CollectionUtils.isEmpty(errorMessages)) {
+			return new LoginResponseVO(HttpStatus.PRECONDITION_REQUIRED, "999", "", errorMessages);
+		}else
+			return ferService.login(loginReqVO);
+	}
+	
+	@PostMapping("/expense")
+	public AddExpenseResponseVO addExpense(@ModelAttribute AddExpenseRequestVO addExpReqVO) {
+		
+		Set<String> errorMessages = ferValidation.validateAddExpenseRequest(addExpReqVO);
+		
+		if(!CollectionUtils.isEmpty(errorMessages)) {
+			return new AddExpenseResponseVO(HttpStatus.PRECONDITION_REQUIRED, "999", "", errorMessages);
+		}else
+			return ferService.addExpense(addExpReqVO);
+	}
 }

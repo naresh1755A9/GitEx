@@ -11,9 +11,14 @@ import com.rs.fer.bean.User;
 import com.rs.fer.dao.AddressRepository;
 import com.rs.fer.dao.ExpenseRepository;
 import com.rs.fer.dao.UserRepository;
+import com.rs.fer.request.AddExpenseRequestVO;
+import com.rs.fer.request.LoginRequestVO;
 import com.rs.fer.request.RegistrationRequestVO;
+import com.rs.fer.response.AddExpenseResponseVO;
+import com.rs.fer.response.LoginResponseVO;
 import com.rs.fer.response.RegistrationResponseVO;
 import com.rs.fer.service.FERservice;
+import com.rs.fer.serviceImpl.Expense;
 import com.rs.fer.util.FERUtil;
 
 @Service
@@ -48,5 +53,29 @@ public class FERServiceimpl implements FERservice {
 		}else {
 			return new RegistrationResponseVO(HttpStatus.OK, "001","User registration Failed", null);
 		}
+	}
+	
+	@Override
+	public LoginResponseVO login(LoginRequestVO loginReqVO) {
+		
+		List<User> users = userRepository.findByUsernameAndPassword(LoginRequestVO.getUsername(), LoginRequestVO.getPassword());
+
+		if(users.size()>0) {
+			return new LoginResponseVO(HttpStatus.OK, "000", "User is valid", null);
+		}else
+			return new LoginResponseVO(HttpStatus.OK, "001", "User is invalid", null);
+	}
+	
+	@Override
+	public AddExpenseResponseVO addExpense(AddExpenseRequestVO addExpReqVO) {
+		
+		Expense expense = FERUtil.loadExpense(addExpReqVO);
+		
+		expense = expenseRepository.save(expense);
+		
+		if(expense.getExpenseid()>0) {
+			return new AddExpenseResponseVO(HttpStatus.OK, "000", "Expense is added successfully", null);
+		}else
+			return new AddExpenseResponseVO(HttpStatus.OK, "001", "Expense add is failed", null);
 	}
 }

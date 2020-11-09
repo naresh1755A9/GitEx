@@ -6,6 +6,8 @@ import java.util.Set;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import com.rs.fer.request.AddExpenseRequestVO;
+import com.rs.fer.request.LoginRequestVO;
 import com.rs.fer.request.RegistrationRequestVO;
 import com.rs.fer.util.validation.FERValidation;
 
@@ -37,4 +39,31 @@ public class FERValidationUtilImpl implements FERValidation {
 		}
 		return errorMessages;
 	}
+	
+	@Override
+	public Set<String> validateLoginRequest(LoginRequestVO loginReqVO) {
+		
+		Set<String> errorMessages = new LinkedHashSet<String>();
+		
+		errorMessages = validateProperty(errorMessages,loginReqVO.getUsername(), "Please enter username");
+		errorMessages = validateProperty(errorMessages,loginReqVO.getPassword(), "Please enter password");
+		
+		return errorMessages;
+	}
+
+	@Override
+	public Set<String> validateAddExpenseRequest(AddExpenseRequestVO addExpVO) {
+		Set<String> errorMessages = new LinkedHashSet<String>();
+		
+		errorMessages = validateProperty(errorMessages,addExpVO.getExpensetype(), "Please enter first name");
+		errorMessages = validateProperty(errorMessages,addExpVO.getDate(), "Please enter last name");
+		errorMessages = validateProperty(errorMessages,addExpVO.getPrice(), "Please enter email");
+		errorMessages = validateProperty(errorMessages,addExpVO.getTotal(), "Please enter username");
+		errorMessages = validateProperty(errorMessages,addExpVO.getNumberofitems(), "Please enter number of items");
+		errorMessages = validateProperty(errorMessages,addExpVO.getBywhom(), "Please enter by whom");
+		errorMessages = validateProperty(errorMessages,addExpVO.getUserid(), "Please enter user id");
+		
+		return errorMessages;
+	}
+
 }
