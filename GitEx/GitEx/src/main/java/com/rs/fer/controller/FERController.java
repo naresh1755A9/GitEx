@@ -5,8 +5,10 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,6 +16,7 @@ import com.rs.fer.request.AddExpenseRequestVO;
 import com.rs.fer.request.LoginRequestVO;
 import com.rs.fer.request.RegistrationRequestVO;
 import com.rs.fer.response.AddExpenseResponseVO;
+import com.rs.fer.response.DeleteExpenseResponseVO;
 import com.rs.fer.response.LoginResponseVO;
 import com.rs.fer.response.RegistrationResponseVO;
 import com.rs.fer.service.FERservice;
@@ -61,4 +64,28 @@ public class FERController {
 		}else
 			return ferService.addExpense(addExpReqVO);
 	}
+	
+	 @PutMapping("/expense")
+     public EditExpenseResponseVO  editExpense(@ModelAttribute EditExpenseRequestVO editReqVo) {
+     
+     Set<String> errorMessages = ferValidation.validateEditExpenseRequest(editReqVo);
+     
+     if(!CollectionUtils.isEmpty(errorMessages)) {
+    	 return new EditExpenseResponseVO(HttpStatus.PRECONDITION_REQUIRED,"999","", errorMessages);
+     }else
+    	 return ferService.editExpense(editReqVo);
+     
+     } 
+	 @DeleteMapping("/deleteExpense/{id}")
+     public DeleteExpenseResponseVO  deleteExpense(@PathVariable ("id") int expenseid) {
+     
+     Set<String> errorMessages = ferValidation.validateDeleteExpense(expenseid);
+     
+     if(!CollectionUtils.isEmpty(errorMessages)) {
+    	 return new DeleteExpenseResponseVO(HttpStatus.PRECONDITION_REQUIRED,"999","", errorMessages);
+     }else
+    	 return ferService.deleteExpense(expenseid);
+     
+     } 
+    	 
 }

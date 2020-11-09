@@ -12,9 +12,12 @@ import com.rs.fer.dao.AddressRepository;
 import com.rs.fer.dao.ExpenseRepository;
 import com.rs.fer.dao.UserRepository;
 import com.rs.fer.request.AddExpenseRequestVO;
+import com.rs.fer.request.EditExpenseRequestVO;
 import com.rs.fer.request.LoginRequestVO;
 import com.rs.fer.request.RegistrationRequestVO;
 import com.rs.fer.response.AddExpenseResponseVO;
+import com.rs.fer.response.DeleteExpenseResponseVO;
+import com.rs.fer.response.EditExpenseResponseVO;
 import com.rs.fer.response.LoginResponseVO;
 import com.rs.fer.response.RegistrationResponseVO;
 import com.rs.fer.service.FERservice;
@@ -78,4 +81,34 @@ public class FERServiceimpl implements FERservice {
 		}else
 			return new AddExpenseResponseVO(HttpStatus.OK, "001", "Expense add is failed", null);
 	}
+	
+	@Override
+	public EditExpenseResponseVO editExpense(EditExpenseRequestVO editReqVo) {
+
+		Expense expense = ferUtil.loadExpense(editReqVo);
+
+		expense = expenseRepository.save(expense);
+
+		if (expense.getExpenseid() > 0) {
+			return new EditExpenseResponseVO(HttpStatus.OK, "000", "Expense edited successfully ", null);
+
+		} else
+			return new EditExpenseResponseVO(HttpStatus.OK, "001", "Expense edited Failed: ", null);
+
+	}
+	
+	@Override
+	public DeleteExpenseResponseVO deleteExpense(int expenseid) {
+		expenseRepository.delete(expenseid);
+		
+		Expense expense = ferUtil.getOne(expenseid);
+
+		if (expense == null) {
+			return new DeleteExpenseResponseVO(HttpStatus.OK, "000", "Expense deleted successfully ", null);
+
+		} else
+			return new DeleteExpenseResponseVO(HttpStatus.OK, "001", "Expense deleted Failed: ", null);
+
+	}
+
 }
