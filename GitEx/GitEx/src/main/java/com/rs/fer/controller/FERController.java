@@ -73,8 +73,9 @@ public class FERController {
 			return new AddExpenseResponseVO(HttpStatus.PRECONDITION_REQUIRED, "999", "", errorMessages);
 		} else
 			return ferService.addExpense(addExpReqVO);
-	}<<<<<<<HEAD @PutMapping("/resetPassword")
+	}
 
+	@PutMapping("/resetPassword")
 	public ResetPasswordResponseVO resetPassword(@ModelAttribute ResetPasswordRequestVO resetReqVO) {
 
 		Set<String> errorMessages = ferValidation.validateResetPasswordRequest(resetReqVO);
@@ -137,9 +138,9 @@ public class FERController {
 
 	@PutMapping("/updateUser")
 	public UpdateUserResponseVO updateUser(@ModelAttribute UpdateUserRequestVO updateUserReqVO) {
-		
+
 		Set<String> errorMessages = ferValidation.validateUpdateUser(updateUserReqVO);
-		
+
 		if (!CollectionUtils.isEmpty(errorMessages)) {
 			return new UpdateUserResponseVO(HttpStatus.PRECONDITION_REQUIRED, "999", "", errorMessages);
 
