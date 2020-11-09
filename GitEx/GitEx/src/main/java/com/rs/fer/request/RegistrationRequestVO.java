@@ -1,3 +1,4 @@
+
 package com.rs.fer.request;
 
 public class RegistrationRequestVO {
@@ -9,6 +10,8 @@ public class RegistrationRequestVO {
 	private String mobile;
 	private String username;
 	private String password;
+	
+	
 	public String getFirstname() {
 		return firstname;
 	}
@@ -51,6 +54,5 @@ public class RegistrationRequestVO {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
 
 }

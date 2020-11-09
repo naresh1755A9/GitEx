@@ -1,3 +1,4 @@
+
 package com.rs.fer.response;
 
 import java.util.Set;
@@ -5,12 +6,19 @@ import java.util.Set;
 import org.springframework.http.HttpStatus;
 
 public class AbstractResponse {
-	
+
 	private HttpStatus status;
 	private String errorCode;
 	private String message;
 	private Set<String> errorMessages;
-	
+
+	public AbstractResponse(HttpStatus status, String errorCode, String message, Set<String> errorMessages) {
+		this.status = status;
+		this.errorCode = errorCode;
+		this.message = message;
+		this.errorMessages = errorMessages;
+	}
+
 	public HttpStatus getStatus() {
 		return status;
 	}
@@ -43,12 +51,4 @@ public class AbstractResponse {
 		this.errorMessages = errorMessages;
 	}
 
-	AbstractResponse(HttpStatus status, String errorCode, String message, Set<String> errorMessages)
-	{
-		this.status=status;
-		this.errorCode=errorCode;
-		this.message=message;
-		this.errorMessages=errorMessages;
-	}
-	
 }

@@ -35,13 +35,13 @@ public class FERUtilImpl implements FERUtil {
 		
 		Expense expense = new Expense();
 		
-		expense.setExpenseType(addExpReqVO.getExpensetype());
+		expense.setExpenseType(addExpReqVO.getExpenseType());
 		expense.setDate(addExpReqVO.getDate());
 		expense.setPrice(addExpReqVO.getPrice());
-		expense.setNumberOfItems(addExpReqVO.getNumberofitems());
+		expense.setNumberOfItems(addExpReqVO.getNumberOfItems());
 		expense.setTotal(addExpReqVO.getTotal());
-		expense.setByWhom(addExpReqVO.getBywhom());
-		expense.setUserId(addExpReqVO.getUserid());
+		expense.setByWhom(addExpReqVO.getByWhom());
+		expense.setUserId(addExpReqVO.getUserId());
 		
 		expense.setCreated(DateUtil.getCurrentDate());
 		

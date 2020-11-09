@@ -4,7 +4,7 @@ public class LoginRequestVO {
 
 	private String username;
 	private String password;
-
+	
 	public String getUsername() {
 		return username;
 	}
@@ -17,5 +17,4 @@ public class LoginRequestVO {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
 }
