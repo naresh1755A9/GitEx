@@ -2,85 +2,75 @@ package com.rs.fer.bean;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Address")
+@Table
 public class Address {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "id", length = 10)
-	private int id;
-	@Column(name = "line1", length = 30)
-	private String line1;
-	@Column(name = "line2", length = 30)
-	private String line2;
-	@Column(name = "city", length = 10)
+	@Column(name="addressid", length=10)
+	private int addressId;
+
+	@Column(name="lineone", length=30)
+	private String lineOne;
+	@Column(name="linetwo", length=30)
+	private String lineTwo;
+	@Column(name="city", length=20)
 	private String city;
-	@Column(name = "state", length = 20)
+	@Column(name="state", length=20)
 	private String state;
-	@Column(name = "postal", length = 10)
-	private String postal;
-	@Column(name = "country", length = 10)
+	@Column(name="country", length=20)
 	private String country;
-	@Column(name = "userId", length = 10)
-	private int userId;
+	@Column(name="pincode", length=10)
+	private String pincode;
+	//@Column(name="userid", length=10)
+	//private int userId;
+
+	@OneToOne
+    @MapsId
+    @JoinColumn(name = "addressid")
+    private User user;
 	
-	@Column(name = "created", length = 10)
+	
+	@Column(name = "created" , length=10)
 	private String created;
-	@Column(name = "updated", length = 10)
+	@Column(name = "updated" , length=10)
 	private String updated;
-
-	public String getCreated() {
-		return created;
+	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	public int getAddressId() {
+		return addressId;
+	}
+	
+	public void setAddressId(int addressId) {
+		this.addressId = addressId;
 	}
 
-	public void setCreated(String created) {
-		this.created = created;
+	public String getLineOne() {
+		return lineOne;
 	}
 
-	public String getUpdated() {
-		return updated;
+	public void setLineOne(String lineOne) {
+		this.lineOne = lineOne;
 	}
 
-	public void setUpdated(String updated) {
-		this.updated = updated;
+	public String getLineTwo() {
+		return lineTwo;
 	}
 
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getLine1() {
-		return line1;
-	}
-
-	public void setLine1(String line1) {
-		this.line1 = line1;
-	}
-
-	public String getLine2() {
-		return line2;
-	}
-
-	public void setLine2(String line2) {
-		this.line2 = line2;
+	public void setLineTwo(String lineTwo) {
+		this.lineTwo = lineTwo;
 	}
 
 	public String getCity() {
@@ -99,20 +89,41 @@ public class Address {
 		this.state = state;
 	}
 
-	public String getPostal() {
-		return postal;
-	}
-
-	public void setPostal(String postal) {
-		this.postal = postal;
-	}
-
 	public String getCountry() {
 		return country;
 	}
 
 	public void setCountry(String country) {
 		this.country = country;
+	}
+
+	public String getPincode() {
+		return pincode;
+	}
+	public void setPincode(String pincode) {
+		this.pincode = pincode;
+	}
+	
+	/*
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+	*/
+	
+	public String getCreated() {
+		return created;
+	}
+	public void setCreated(String created) {
+		this.created = created;
+	}
+	public String getUpdated() {
+		return updated;
+	}
+	public void setUpdated(String updated) {
+		this.updated = updated;
 	}
 
 }

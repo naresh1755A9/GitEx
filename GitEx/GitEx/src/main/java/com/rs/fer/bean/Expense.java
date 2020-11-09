@@ -5,74 +5,54 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Expense")
+@Table
 public class Expense {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "expenseId")
-	private int id;
-	@Column(name = "expenseType", length = 10)
+	@GeneratedValue (strategy = GenerationType.IDENTITY)
+	@Column(name="expenseid", length=10)
+	private int expenseId;
+	
+	@Column(name="expensetype", length=15)
 	private String expenseType;
-	@Column(name = "date", length = 10)
+	@Column(name="date", length=10)
 	private String date;
-	@Column(name = "price", length = 10)
+	@Column(name="price", length=10)
 	private float price;
-	@Column(name = "numberofitems", length = 10)
-	private int numberofitems;
-	@Column(name = "total", length = 10)
+	@Column(name="numberofitems", length=10)
+	private int numberOfItems;
+	@Column(name="total", length=10)
 	private float total;
-	@Column(name = "bywhom", length = 10)
-	private String bywhom;
-	@Column(name = "userId", length = 10)
+	@Column(name="bywhom", length=15)
+	private String byWhom;
+	
+	@Column(name="user_id", length=10)
 	private int userId;
-    	
-	@Column(name = "created", length = 10)
+
+
+	@Column(name = "created" , length=10)
 	private String created;
-	@Column(name = "updated", length = 10)
+	@Column(name = "updated" , length=10)
 	private String updated;
-
-	public String getCreated() {
-		return created;
+	
+	public int getExpenseId() {
+		return expenseId;
 	}
-
-	public void setCreated(String created) {
-		this.created = created;
+	
+	public void setExpenseId(int expenseId) {
+		this.expenseId = expenseId;
 	}
-
-	public String getUpdated() {
-		return updated;
-	}
-
-	public void setUpdated(String updated) {
-		this.updated = updated;
-	}
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
+	
 	public String getExpenseType() {
 		return expenseType;
 	}
-
-	public void setExpenseType(String expensetype) {
-		this.expenseType = expensetype;
+	public void setExpenseType(String expenseType) {
+		this.expenseType = expenseType;
 	}
 
 	public String getDate() {
@@ -91,12 +71,12 @@ public class Expense {
 		this.price = price;
 	}
 
-	public int getNumberofitems() {
-		return numberofitems;
+	public int getNumberOfItems() {
+		return numberOfItems;
 	}
 
-	public void setNumberofitems(int numberofitems) {
-		this.numberofitems = numberofitems;
+	public void setNumberOfItems(int numberOfItems) {
+		this.numberOfItems = numberOfItems;
 	}
 
 	public float getTotal() {
@@ -107,12 +87,33 @@ public class Expense {
 		this.total = total;
 	}
 
-	public String getBywhom() {
-		return bywhom;
+	public String getByWhom() {
+		return byWhom;
 	}
 
-	public void setBywhom(String bywhom) {
-		this.bywhom = bywhom;
+	public void setByWhom(String byWhom) {
+		this.byWhom = byWhom;
 	}
 
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+	public String getCreated() {
+		return created;
+	}
+	public void setCreated(String created) {
+		this.created = created;
+	}
+	public String getUpdated() {
+		return updated;
+	}
+	public void setUpdated(String updated) {
+		this.updated = updated;
+	}
+	
+	
+	
 }

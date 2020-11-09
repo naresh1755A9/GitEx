@@ -10,4 +10,7 @@ import com.rs.fer.bean.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer>{
 	
+	List<User> findByUsernameAndPassword(String username, String password);
+	List<User> findByEmail(String email);
+	User findByIdAndPassword(int userId, String password);
 }
