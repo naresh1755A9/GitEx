@@ -10,11 +10,8 @@ import com.rs.fer.request.AddExpenseRequestVO;
 import com.rs.fer.request.ExpenseReportRequestVO;
 import com.rs.fer.request.LoginRequestVO;
 import com.rs.fer.request.RegistrationRequestVO;
-<<<<<<< HEAD
 import com.rs.fer.request.ResetPasswordRequestVO;
-=======
 import com.rs.fer.request.UpdateUserRequestVO;
->>>>>>> branch 'master' of https://github.com/naresh1755A9/GitEx.git
 import com.rs.fer.util.validation.FERValidation;
 
 @Component
@@ -61,17 +58,6 @@ public class FERValidationUtilImpl implements FERValidation {
 	@Override
 	public Set<String> validateAddExpenseRequest(AddExpenseRequestVO addExpVO) {
 		Set<String> errorMessages = new LinkedHashSet<String>();
-<<<<<<< HEAD
-
-		errorMessages = validateProperty(errorMessages, addExpVO.getExpensetype(), "Please enter first name");
-		errorMessages = validateProperty(errorMessages, addExpVO.getDate(), "Please enter last name");
-		errorMessages = validateProperty(errorMessages, addExpVO.getPrice(), "Please enter email");
-		errorMessages = validateProperty(errorMessages, addExpVO.getTotal(), "Please enter username");
-		errorMessages = validateProperty(errorMessages, addExpVO.getNumberofitems(), "Please enter number of items");
-		errorMessages = validateProperty(errorMessages, addExpVO.getBywhom(), "Please enter by whom");
-		errorMessages = validateProperty(errorMessages, addExpVO.getUserid(), "Please enter user id");
-
-=======
 		
 		errorMessages = validateProperty(errorMessages,addExpVO.getExpenseType(), "Please enter first name");
 		errorMessages = validateProperty(errorMessages,addExpVO.getDate(), "Please enter last name");
@@ -81,7 +67,6 @@ public class FERValidationUtilImpl implements FERValidation {
 		errorMessages = validateProperty(errorMessages,addExpVO.getByWhom(), "Please enter by whom");
 		errorMessages = validateProperty(errorMessages,addExpVO.getUserId(), "Please enter user id");
 		
->>>>>>> branch 'master' of https://github.com/naresh1755A9/GitEx.git
 		return errorMessages;
 	}
 	

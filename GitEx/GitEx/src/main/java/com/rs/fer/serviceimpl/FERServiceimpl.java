@@ -20,31 +20,30 @@ import com.rs.fer.request.ExpenseReportRequestVO;
 >>>>>>> branch 'master' of https://github.com/naresh1755A9/GitEx.git
 import com.rs.fer.request.LoginRequestVO;
 import com.rs.fer.request.RegistrationRequestVO;
-<<<<<<< HEAD
 import com.rs.fer.request.ResetPasswordRequestVO;
-=======
 import com.rs.fer.request.UpdateUserRequestVO;
->>>>>>> branch 'master' of https://github.com/naresh1755A9/GitEx.git
 import com.rs.fer.response.AddExpenseResponseVO;
+<<<<<<< HEAD
 <<<<<<< HEAD
 import com.rs.fer.response.DeleteExpenseResponseVO;
 import com.rs.fer.response.EditExpenseResponseVO;
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> branch 'master' of https://github.com/naresh1755A9/GitEx.git
 import com.rs.fer.response.GetExpenseResponseVO;
 import com.rs.fer.response.GetExpensesResponseVO;
-=======
 import com.rs.fer.response.ExpenseReportResponseVO;
 import com.rs.fer.response.GetUserResponseVO;
+<<<<<<< HEAD
 >>>>>>> branch 'master' of https://github.com/naresh1755A9/GitEx.git
+>>>>>>> branch 'master' of https://github.com/naresh1755A9/GitEx.git
+=======
 >>>>>>> branch 'master' of https://github.com/naresh1755A9/GitEx.git
 import com.rs.fer.response.LoginResponseVO;
 import com.rs.fer.response.RegistrationResponseVO;
-<<<<<<< HEAD
 import com.rs.fer.response.ResetPasswordResponseVO;
-=======
 import com.rs.fer.response.UpdateUserResponseVO;
->>>>>>> branch 'master' of https://github.com/naresh1755A9/GitEx.git
 import com.rs.fer.service.FERservice;
 import com.rs.fer.util.FERUtil;
 
@@ -85,12 +84,9 @@ public class FERServiceimpl implements FERservice {
 	@Override
 	public LoginResponseVO login(LoginRequestVO loginReqVO) {
 
-<<<<<<< HEAD
-		List<User> users = userRepository.findByUsernameAndPassword(LoginRequestVO.getUsername(),
-				LoginRequestVO.getPassword());
-=======
-		List<User> users = userRepository.findByUsernameAndPassword(loginReqVO.getUsername(), loginReqVO.getPassword());
->>>>>>> branch 'master' of https://github.com/naresh1755A9/GitEx.git
+		List<User> users = userRepository.findByUsernameAndPassword(loginReqVO.getUsername(),
+				loginReqVO.getPassword());
+
 
 		if (users.size() > 0) {
 			return new LoginResponseVO(HttpStatus.OK, "000", "User is valid", null);
@@ -101,18 +97,12 @@ public class FERServiceimpl implements FERservice {
 	@Override
 	public AddExpenseResponseVO addExpense(AddExpenseRequestVO addExpReqVO) {
 
-<<<<<<< HEAD
-		Expense expense = FERUtil.loadExpense(addExpReqVO);
-=======
 		Expense expense = ferUtil.loadExpense(addExpReqVO);
->>>>>>> branch 'master' of https://github.com/naresh1755A9/GitEx.git
 
 		expense = expenseRepository.save(expense);
 
-<<<<<<< HEAD
-		if (expense.getExpenseid() > 0) {
-=======
 		if (expense.getExpenseId() > 0) {
+<<<<<<< HEAD
 >>>>>>> branch 'master' of https://github.com/naresh1755A9/GitEx.git
 			return new AddExpenseResponseVO(HttpStatus.OK, "000", "Expense is added successfully", null);
 		} else
@@ -150,9 +140,15 @@ public class FERServiceimpl implements FERservice {
 	}
 
 =======
+=======
+>>>>>>> branch 'master' of https://github.com/naresh1755A9/GitEx.git
 
-<<<<<<< HEAD
-}
+			return new AddExpenseResponseVO(HttpStatus.OK, "000", "Expense is added successfully", null);
+		} else {
+			return new AddExpenseResponseVO(HttpStatus.OK, "001", "Expense add is failed", null);
+		}
+
+	}
 
 	@Override
 	public GetExpenseResponseVO getexpense(int expenseId) {
@@ -186,21 +182,21 @@ public class FERServiceimpl implements FERservice {
 		}
 	}
 
-@Override
-public ResetPasswordResponseVO resetPassword(ResetPasswordRequestVO resetReqVO) {
+	@Override
+	public ResetPasswordResponseVO resetPassword(ResetPasswordRequestVO resetReqVO) {
 
-	User user = userRepository.findByIdAndPassword(resetReqVO.getUserId(), resetReqVO.getCurrentPassword());
-	;
-	user.setPassword(resetReqVO.getNewPassword());
-	user = userRepository.save(user);
+		User user = userRepository.findByIdAndPassword(resetReqVO.getUserId(), resetReqVO.getCurrentPassword());
+		;
+		user.setPassword(resetReqVO.getNewPassword());
+		user = userRepository.save(user);
 
-	if (user.getPassword() == resetReqVO.getNewPassword()) {
-		return new ResetPasswordResponseVO(HttpStatus.OK, "000", "Password reset is successflly", null);
-	} else
-		return new ResetPasswordResponseVO(HttpStatus.OK, "001", "Passsword reset  is failed", null);
+		if (user.getPassword() == resetReqVO.getNewPassword()) {
+			return new ResetPasswordResponseVO(HttpStatus.OK, "000", "Password reset is successflly", null);
+		} else
+			return new ResetPasswordResponseVO(HttpStatus.OK, "001", "Passsword reset  is failed", null);
 
-}
-=======
+	}
+
 	@Override
 	public ExpenseReportResponseVO expenseReport(ExpenseReportRequestVO reportReqVO) {
 
@@ -242,6 +238,9 @@ public ResetPasswordResponseVO resetPassword(ResetPasswordRequestVO resetReqVO) 
 
 	}
 
+<<<<<<< HEAD
 >>>>>>> branch 'master' of https://github.com/naresh1755A9/GitEx.git
+>>>>>>> branch 'master' of https://github.com/naresh1755A9/GitEx.git
+=======
 >>>>>>> branch 'master' of https://github.com/naresh1755A9/GitEx.git
 }

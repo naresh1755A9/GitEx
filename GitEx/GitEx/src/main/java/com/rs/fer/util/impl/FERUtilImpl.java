@@ -1,11 +1,7 @@
 package com.rs.fer.util.impl;
 
 import org.springframework.stereotype.Component;
-
-<<<<<<< HEAD
-=======
 import com.rs.fer.bean.Address;
->>>>>>> branch 'master' of https://github.com/naresh1755A9/GitEx.git
 import com.rs.fer.bean.Expense;
 import com.rs.fer.bean.User;
 import com.rs.fer.request.AddExpenseRequestVO;
@@ -37,26 +33,14 @@ public class FERUtilImpl implements FERUtil {
 	public Expense loadExpense(AddExpenseRequestVO addExpReqVO) {
 
 		Expense expense = new Expense();
-<<<<<<< HEAD
-
-		expense.setExpensetype(addExpReqVO.getExpensetype());
-=======
 		
 		expense.setExpenseType(addExpReqVO.getExpenseType());
->>>>>>> branch 'master' of https://github.com/naresh1755A9/GitEx.git
 		expense.setDate(addExpReqVO.getDate());
 		expense.setPrice(addExpReqVO.getPrice());
 		expense.setNumberOfItems(addExpReqVO.getNumberOfItems());
 		expense.setTotal(addExpReqVO.getTotal());
-<<<<<<< HEAD
-		expense.setBywhom(addExpReqVO.getBywhom());
-		expense.setUserid(addExpReqVO.getUserid());
-
-=======
 		expense.setByWhom(addExpReqVO.getByWhom());
 		expense.setUserId(addExpReqVO.getUserId());
-		
->>>>>>> branch 'master' of https://github.com/naresh1755A9/GitEx.git
 		expense.setCreated(DateUtil.getCurrentDate());
 
 		return expense;
