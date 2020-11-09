@@ -1,3 +1,4 @@
+
 package com.rs.fer.response;
 
 import java.util.Set;
@@ -10,3 +11,4 @@ public class RegistrationResponseVO extends AbstractResponse {
 		super(status, errorCode, message, errorMessages);
 	}
 }
+

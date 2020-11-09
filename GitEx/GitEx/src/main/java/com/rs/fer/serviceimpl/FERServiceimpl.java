@@ -13,15 +13,29 @@ import com.rs.fer.dao.AddressRepository;
 import com.rs.fer.dao.ExpenseRepository;
 import com.rs.fer.dao.UserRepository;
 import com.rs.fer.request.AddExpenseRequestVO;
+import com.rs.fer.request.ExpenseReportRequestVO;
 import com.rs.fer.request.LoginRequestVO;
 import com.rs.fer.request.RegistrationRequestVO;
+<<<<<<< HEAD
 import com.rs.fer.request.ResetPasswordRequestVO;
+=======
+import com.rs.fer.request.UpdateUserRequestVO;
+>>>>>>> branch 'master' of https://github.com/naresh1755A9/GitEx.git
 import com.rs.fer.response.AddExpenseResponseVO;
+<<<<<<< HEAD
 import com.rs.fer.response.GetExpenseResponseVO;
 import com.rs.fer.response.GetExpensesResponseVO;
+=======
+import com.rs.fer.response.ExpenseReportResponseVO;
+import com.rs.fer.response.GetUserResponseVO;
+>>>>>>> branch 'master' of https://github.com/naresh1755A9/GitEx.git
 import com.rs.fer.response.LoginResponseVO;
 import com.rs.fer.response.RegistrationResponseVO;
+<<<<<<< HEAD
 import com.rs.fer.response.ResetPasswordResponseVO;
+=======
+import com.rs.fer.response.UpdateUserResponseVO;
+>>>>>>> branch 'master' of https://github.com/naresh1755A9/GitEx.git
 import com.rs.fer.service.FERservice;
 import com.rs.fer.util.FERUtil;
 
@@ -62,8 +76,12 @@ public class FERServiceimpl implements FERservice {
 	@Override
 	public LoginResponseVO login(LoginRequestVO loginReqVO) {
 
+<<<<<<< HEAD
 		List<User> users = userRepository.findByUsernameAndPassword(LoginRequestVO.getUsername(),
 				LoginRequestVO.getPassword());
+=======
+		List<User> users = userRepository.findByUsernameAndPassword(loginReqVO.getUsername(), loginReqVO.getPassword());
+>>>>>>> branch 'master' of https://github.com/naresh1755A9/GitEx.git
 
 		if (users.size() > 0) {
 			return new LoginResponseVO(HttpStatus.OK, "000", "User is valid", null);
@@ -74,16 +92,25 @@ public class FERServiceimpl implements FERservice {
 	@Override
 	public AddExpenseResponseVO addExpense(AddExpenseRequestVO addExpReqVO) {
 
+<<<<<<< HEAD
 		Expense expense = FERUtil.loadExpense(addExpReqVO);
+=======
+		Expense expense = ferUtil.loadExpense(addExpReqVO);
+>>>>>>> branch 'master' of https://github.com/naresh1755A9/GitEx.git
 
 		expense = expenseRepository.save(expense);
 
+<<<<<<< HEAD
 		if (expense.getExpenseid() > 0) {
+=======
+		if (expense.getExpenseId() > 0) {
+>>>>>>> branch 'master' of https://github.com/naresh1755A9/GitEx.git
 			return new AddExpenseResponseVO(HttpStatus.OK, "000", "Expense is added successfully", null);
 		} else
 			return new AddExpenseResponseVO(HttpStatus.OK, "001", "Expense add is failed", null);
 	}
 
+<<<<<<< HEAD
 }
 
 	@Override
@@ -132,4 +159,47 @@ public ResetPasswordResponseVO resetPassword(ResetPasswordRequestVO resetReqVO) 
 		return new ResetPasswordResponseVO(HttpStatus.OK, "001", "Passsword reset  is failed", null);
 
 }
+=======
+	@Override
+	public ExpenseReportResponseVO expenseReport(ExpenseReportRequestVO reportReqVO) {
+
+		List<Expense> expenses = expenseRepository.findByUserIdAndExpenseTypeAndDateBetween(reportReqVO.getUserId(),
+				reportReqVO.getExpenseType(), reportReqVO.getFromDate(), reportReqVO.getToDate());
+
+		if (!expenses.isEmpty()) {
+			return new ExpenseReportResponseVO(HttpStatus.OK, "000", "", null, expenses);
+
+		} else
+			return new ExpenseReportResponseVO(HttpStatus.OK, "001", "no expenses were found", null);
+
+	}
+
+	@Override
+	public GetUserResponseVO getUser(int Id) {
+
+		User user = userRepository.getOne(Id);
+
+		if (user != null) {
+			return new GetUserResponseVO(HttpStatus.OK, "000", "", null, user);
+		} else
+			return new GetUserResponseVO(HttpStatus.OK, "001", "no user found for given id", null);
+
+	}
+
+	@Override
+	public UpdateUserResponseVO updateUser(UpdateUserRequestVO updateUserReqVO) {
+
+		User user = ferUtil.loadUpdateUser(updateUserReqVO);
+
+		user = userRepository.save(user);
+
+		if (user.getId() > 0) {
+			return new UpdateUserResponseVO(HttpStatus.OK, "000", "update user is successful", null);
+
+		} else
+			return new UpdateUserResponseVO(HttpStatus.OK, "001", "update user is failed", null);
+
+	}
+
+>>>>>>> branch 'master' of https://github.com/naresh1755A9/GitEx.git
 }

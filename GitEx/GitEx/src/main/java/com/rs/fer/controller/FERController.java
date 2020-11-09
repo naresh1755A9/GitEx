@@ -13,15 +13,21 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rs.fer.request.AddExpenseRequestVO;
+import com.rs.fer.request.ExpenseReportRequestVO;
 import com.rs.fer.request.LoginRequestVO;
 import com.rs.fer.request.RegistrationRequestVO;
 import com.rs.fer.request.ResetPasswordRequestVO;
-import com.rs.fer.respone.GetExpenseResponseVO;
-import com.rs.fer.respone.GetExpensesResponseVO;
-import com.rs.fer.respone.ResetPasswordResponseVO;
+import com.rs.fer.request.UpdateUserRequestVO;
+//github.com/naresh1755A9/GitEx.git
 import com.rs.fer.response.AddExpenseResponseVO;
+import com.rs.fer.response.ExpenseReportResponseVO;
+import com.rs.fer.response.GetExpenseResponseVO;
+import com.rs.fer.response.GetExpensesResponseVO;
+import com.rs.fer.response.GetUserResponseVO;
 import com.rs.fer.response.LoginResponseVO;
 import com.rs.fer.response.RegistrationResponseVO;
+import com.rs.fer.response.ResetPasswordResponseVO;
+import com.rs.fer.response.UpdateUserResponseVO;
 import com.rs.fer.service.FERservice;
 import com.rs.fer.util.validation.FERValidation;
 
@@ -36,38 +42,39 @@ public class FERController {
 
 	@PostMapping("/registration")
 	public RegistrationResponseVO registration(@ModelAttribute RegistrationRequestVO regReqVO) {
-		
+
 		Set<String> errorMessages = ferValidation.validateRegistrationRequest(regReqVO);
-		
+
 		if (!CollectionUtils.isEmpty(errorMessages)) {
 			return new RegistrationResponseVO(HttpStatus.PRECONDITION_REQUIRED, "999", "", errorMessages);
-		}else {
+		} else {
 			return ferService.registration(regReqVO);
 		}
+
 	}
-	
+
 	@GetMapping("/login")
 	public LoginResponseVO login(@ModelAttribute LoginRequestVO loginReqVO) {
-		
+
 		Set<String> errorMessages = ferValidation.validateLoginRequest(loginReqVO);
-		
-		if(!CollectionUtils.isEmpty(errorMessages)) {
+
+		if (!CollectionUtils.isEmpty(errorMessages)) {
 			return new LoginResponseVO(HttpStatus.PRECONDITION_REQUIRED, "999", "", errorMessages);
-		}else
+		} else
 			return ferService.login(loginReqVO);
 	}
-	
+
 	@PostMapping("/expense")
 	public AddExpenseResponseVO addExpense(@ModelAttribute AddExpenseRequestVO addExpReqVO) {
-		
+
 		Set<String> errorMessages = ferValidation.validateAddExpenseRequest(addExpReqVO);
-		
-		if(!CollectionUtils.isEmpty(errorMessages)) {
+
+		if (!CollectionUtils.isEmpty(errorMessages)) {
 			return new AddExpenseResponseVO(HttpStatus.PRECONDITION_REQUIRED, "999", "", errorMessages);
-		}else
+		} else
 			return ferService.addExpense(addExpReqVO);
-	}
-	@PutMapping("/resetPassword")
+	}<<<<<<<HEAD @PutMapping("/resetPassword")
+
 	public ResetPasswordResponseVO resetPassword(@ModelAttribute ResetPasswordRequestVO resetReqVO) {
 
 		Set<String> errorMessages = ferValidation.validateResetPasswordRequest(resetReqVO);
@@ -103,4 +110,41 @@ public class FERController {
 			return ferService.getexpenses(userId);
 	}
 
+	@GetMapping("/expenseReport/{userid}")
+	public ExpenseReportResponseVO expenseReport(@ModelAttribute ExpenseReportRequestVO reportReqVO) {
+
+		Set<String> errorMessages = ferValidation.validateExpenseReport(reportReqVO);
+
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			return new ExpenseReportResponseVO(HttpStatus.PRECONDITION_REQUIRED, "999", "", errorMessages);
+
+		} else
+			return ferService.expenseReport(reportReqVO);
+
+	}
+
+	@GetMapping("/user/{id}")
+	public GetUserResponseVO getUser(@PathVariable("id") int id) {
+
+		Set<String> errorMessages = ferValidation.validateGetUser(id);
+
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			return new GetUserResponseVO(HttpStatus.PRECONDITION_REQUIRED, "999", "", errorMessages);
+
+		} else
+			return ferService.getUser(id);
+	}
+
+	@PutMapping("/updateUser")
+	public UpdateUserResponseVO updateUser(@ModelAttribute UpdateUserRequestVO updateUserReqVO) {
+		
+		Set<String> errorMessages = ferValidation.validateUpdateUser(updateUserReqVO);
+		
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			return new UpdateUserResponseVO(HttpStatus.PRECONDITION_REQUIRED, "999", "", errorMessages);
+
+		} else
+			return ferService.updateUser(updateUserReqVO);
+
+	}
 }
